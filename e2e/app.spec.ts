@@ -8,7 +8,7 @@ test.describe('App', () => {
 
   test('should display the app title', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('span')).toContainText('angular-jasmine-karma-demo app is running!');
+    await expect(page.getByText('angular-jasmine-karma-demo app is running!')).toBeVisible();
   });
 
   test('should have router-outlet', async ({ page }) => {
