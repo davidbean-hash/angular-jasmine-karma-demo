@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../../domain/item.model';
+import { NgFor } from '@angular/common';
+import { Item } from '../../../domain/item.model';
+import { ItemComponent } from '../item/item.component';
 
 @Component({
   selector: 'app-items',
+  standalone: true,
+  imports: [NgFor, ItemComponent],
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss']
 })
@@ -21,6 +25,7 @@ export class ItemsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.applySort();
   }
 
   sortItems(field: string): void {

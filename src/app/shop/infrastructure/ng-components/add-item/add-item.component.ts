@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
    selector: 'app-add-item',
+   standalone: true,
+   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule],
    templateUrl: './add-item.component.html',
    styleUrls: ['./add-item.component.scss']
 })
@@ -10,7 +16,7 @@ export class AddItemComponent implements OnInit {
 
    form: FormGroup;
 
-   constructor(private fb: FormBuilder,) { }
+   constructor(private fb: FormBuilder) { }
 
    ngOnInit(): void {
       this.formInit();
@@ -27,15 +33,4 @@ export class AddItemComponent implements OnInit {
    saveItem() {
       console.info('saveItem');
    }
-
-   /*
-   setForm(){
-      this.employeeDetail.controls["name"].setValue(this.employee.name);
-      this.employeeDetail.controls["surname"].setValue(this.employee.surname);
-      this.employeeDetail.controls["companyEmail"].setValue(this.employee.companyEmail);
-      this.employeeDetail.controls["personalEmail"].setValue(this.employee.personalEmail);
-      this.employeeDetail.controls["address"].setValue(this.employee.address);
-      this.employeeDetail.controls["englishLevel"].setValue(this.employee.englishLevel);
-   }
-   */
 }

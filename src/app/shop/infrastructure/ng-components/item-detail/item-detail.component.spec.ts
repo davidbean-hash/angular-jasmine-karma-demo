@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Item } from 'src/app/shop/domain/item.model';
+import { Item } from '../../../domain/item.model';
 import { ItemDetailComponent } from './item-detail.component';
 
 describe('ItemDetailComponent: testing @Input from parent', () => {
@@ -9,7 +9,7 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [ItemDetailComponent]
+         imports: [ItemDetailComponent]
       })
          .compileComponents();
    });
@@ -18,11 +18,9 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
       fixture = TestBed.createComponent(ItemDetailComponent);
       component = fixture.componentInstance;
 
-      // pretend that it was wired to something that supplied an Item
       itemInput = { 'name': 'foo', 'description': 'bar', 'price': '33' };
       component.item = itemInput;
 
-      // trigger initial data binding
       fixture.detectChanges();
    });
 
@@ -31,15 +29,15 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
    });
 
    it('should get the name param value from @Input', () => {
-      expect(component.item.name).toContain(itemInput.name);
+      expect(component.item!.name).toContain(itemInput.name);
    });
 
    it('should get the description param value from @Input', () => {
-      expect(component.item.description).toContain(itemInput.description);
+      expect(component.item!.description).toContain(itemInput.description);
    });
 
    it('should get the price param value from @Input', () => {
-      expect(component.item.price).toContain(itemInput.price);
+      expect(component.item!.price).toContain(itemInput.price);
    });
 
    it('should handle null item input', () => {
@@ -58,9 +56,9 @@ describe('ItemDetailComponent: testing @Input from parent', () => {
       const newItem = { 'name': 'new item', 'description': 'new description', 'price': '99' };
       component.item = newItem;
       fixture.detectChanges();
-      expect(component.item.name).toEqual('new item');
-      expect(component.item.description).toEqual('new description');
-      expect(component.item.price).toEqual('99');
+      expect(component.item!.name).toEqual('new item');
+      expect(component.item!.description).toEqual('new description');
+      expect(component.item!.price).toEqual('99');
    });
 
    it('should render item-detail works text', () => {
