@@ -1,16 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+      imports: [AppComponent],
+      providers: [provideRouter([])]
     }).compileComponents();
   });
 
@@ -26,7 +22,6 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('angular-jasmine-karma-demo');
   });
 
-  // Test for rendering the title in the template
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
@@ -34,7 +29,6 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('span')?.textContent).toContain('angular-jasmine-karma-demo app is running!');
   });
 
-  // Test for verifying router-outlet is present
   it('should have router-outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
@@ -42,7 +36,6 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
   });
 
-  // Test for verifying the title can be changed
   it('should allow title to be changed', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;

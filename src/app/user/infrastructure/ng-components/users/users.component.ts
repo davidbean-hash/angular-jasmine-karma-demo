@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersServices } from '../../application/UsersServices';
+import { NgFor } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { UsersServices } from '../../../application/UsersServices';
 
 @Component({
    selector: 'app-users',
+   standalone: true,
+   imports: [NgFor, MatButtonModule],
    templateUrl: './users.component.html',
    styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
 
-   users:any = [];
+   users: any = [];
 
    constructor(public usersServices: UsersServices) { }
 
@@ -17,6 +21,6 @@ export class UsersComponent implements OnInit {
 
    getUsers() {
       console.info('getUsers');
-      this.usersServices.getUsers().subscribe(users => {this.users = users});
+      this.usersServices.getUsers().subscribe(users => { this.users = users });
    }
 }

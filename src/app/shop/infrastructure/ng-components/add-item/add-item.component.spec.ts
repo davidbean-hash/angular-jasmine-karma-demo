@@ -1,7 +1,5 @@
-import { ComponentFixture, TestBed, } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AddItemComponent } from './add-item.component';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 describe('AddItemComponent: testing form validation', () => {
@@ -10,8 +8,7 @@ describe('AddItemComponent: testing form validation', () => {
 
    beforeEach(async () => {
       await TestBed.configureTestingModule({
-         declarations: [AddItemComponent],
-         imports: [FormsModule, ReactiveFormsModule]
+         imports: [AddItemComponent]
       })
          .compileComponents();
    });
@@ -83,17 +80,16 @@ describe('AddItemComponent: testing form validation', () => {
    });
 
    it('button save should not call saveItem when form is invalid', () => {
-      // Jasmine feature that allows dynamically intercepting the calls to a function
-      spyOn(component, 'saveItem');
+      vi.spyOn(component, 'saveItem');
       let saveItemButton = fixture.debugElement.query(By.css('button')).nativeElement;
       saveItemButton.click();
-      expect(component.saveItem).toHaveBeenCalledTimes(0); // remember: button is disabled if form is invalid
+      expect(component.saveItem).toHaveBeenCalledTimes(0);
    });
 
    it('button save should call saveItem when form is valid', () => {
       let saveItemButton = fixture.debugElement.query(By.css('button')).nativeElement;
-      spyOn(component, 'saveItem');
-      
+      vi.spyOn(component, 'saveItem');
+
       component.form.controls['name'].setValue('foo');
       component.form.controls['description'].setValue('bar');
       component.form.controls['price'].setValue('33');
@@ -104,7 +100,7 @@ describe('AddItemComponent: testing form validation', () => {
    });
 
    it('saveItem method should log to console', () => {
-      spyOn(console, 'info');
+      vi.spyOn(console, 'info').mockImplementation(() => {});
       component.saveItem();
       expect(console.info).toHaveBeenCalledWith('saveItem');
    });
@@ -119,7 +115,7 @@ describe('AddItemComponent: testing form validation', () => {
       component.form.controls['description'].setValue('bar');
       component.form.controls['price'].setValue('33');
       fixture.detectChanges();
-      
+
       const saveButton = fixture.debugElement.query(By.css('button')).nativeElement;
       expect(saveButton.disabled).toBeFalsy();
    });
